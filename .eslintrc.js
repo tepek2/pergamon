@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
     env: {
         node: true,
@@ -12,6 +14,8 @@ module.exports = {
     },
     rules: {
         semi: ['error', 'always'],
-        indent: ['error', 4]
+        indent: ['error', 4],
+        strict: ['error', 'global'],
+        'max-len': ['error', { code: 140 }]
     }
 };

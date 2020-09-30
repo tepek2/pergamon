@@ -1,10 +1,12 @@
 {
   "name": "pergamon",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Simple storage for Nodejs",
   "main": "index.js",
+  "typings": "./types/index.d.ts",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "tsc": "tsc"
   },
   "author": "tepek2",
   "license": "MIT",
@@ -16,6 +18,20 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "jest": "^26.4.2"
-  }
+    "jest": "^26.4.2",
+    "typescript": "^4.0.3"
+  },
+  "engines": {
+    "node": ">=12.19.0"
+  },
+  "homepage": "https://github.com/tepek2/pergamon",
+  "keywords": [
+    "db",
+    "database",
+    "store",
+    "pergamon",
+    "nodejs",
+    "javascript",
+    "typescript"
+  ]
 }

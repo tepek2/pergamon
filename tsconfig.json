@@ -1,0 +1,22 @@
+{
+    "include": [
+        "src/**/*",
+        "index.js"
+    ],
+    "exclude": [
+        "./node_modules/**/*",
+        "./types/**/*",
+        "./test/**/*"
+    ],
+    "compilerOptions": {
+        "allowJs": true,
+        "checkJs": false,
+        "strict": true,
+        "declaration": true,
+        "emitDeclarationOnly": true,
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "module": "CommonJS",
+        "outDir": "./types",
+    },
+  }
