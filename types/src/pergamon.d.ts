@@ -16,25 +16,24 @@ declare class Pergamon {
     path: string;
     /** @type {Object.<string, Table>} - tables in db */
     tables: {
-        [x: string]: import("./table");
+        [x: string]: import("./table")<any>;
     };
     /**
      * @async
      */
     init(): Promise<void>;
     /**
+     * Create new json
+     * @param {string} name - json name
+     * @returns {Json}
+     */
+    createJson(name: string): import("./json")<any>;
+    /**
      * Create new table
      * @param {string} name - table name
      * @returns {Table}
      */
-    createTable(name: string): import("./table");
-    /**
-     * Delete table
-     * @async
-     * @param {string} name - table name
-     * @returns {Promise<void>}
-     */
-    dropTable(name: string): Promise<void>;
+    createTable(name: string): import("./table")<any>;
     /**
      * Delete all tables
      * @returns {Promise<void>}

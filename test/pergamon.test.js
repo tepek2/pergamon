@@ -35,19 +35,7 @@ describe('test pergamon', () => {
             const db2Table2 = db2.createTable('table2');
             await db2Table2.insert(db2Table2Data);
 
-            expect(await db1.tables.table1.get(0)).toMatchObject(db1Table1Data);
-            expect(await db1.tables.table2.get(0)).toMatchObject(db1Table2Data);
-
-            expect(await db2.tables.table1.get(0)).toMatchObject(db2Table1Data);
-            expect(await db2.tables.table2.get(0)).toMatchObject(db2Table2Data);
-
-            await db1.dropTable('table1');
-
-            expect(db1.tables.table1).toBeUndefined();
-            expect(await db1.tables.table2.get(0)).toMatchObject(db1Table2Data);
-
-            expect(await db2.tables.table1.get(0)).toMatchObject(db2Table1Data);
-            expect(await db2.tables.table2.get(0)).toMatchObject(db2Table2Data);
+            await db1Table1.drop();
 
             await db2.deleteDb();
 
@@ -55,10 +43,8 @@ describe('test pergamon', () => {
             expect(await exists(db2Table2.getTablePath())).toBeFalsy();
 
             await db2Table1.insert(db2Table1Data);
-            await db2.tables.table2.insert(db2Table2Data);
 
             expect(await db2Table1.get(0)).toMatchObject(db2Table1Data);
-            expect(await db2Table2.get(0)).toMatchObject(db2Table2Data);
         });
 
         it('should load database', async () => {
@@ -70,7 +56,6 @@ describe('test pergamon', () => {
 
             const table = db.createTable('table');
 
-            expect(await db.tables.table.get(0)).toMatchObject(data);
             expect(await table.get(0)).toMatchObject(data);
         });
     });

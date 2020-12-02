@@ -3,8 +3,12 @@
 const { createFile, deleteFile } = require('./utils/fs-utils');
 const { getItem, filterItems, updateItem, deleteItem, insertItem, setItem } = require('./data-functions');
 
+/**
+ * @template T
+ */
 class Table {
     /**
+     * @constructor
      * @param {string} path - path to table file
      */
     constructor (path) {
@@ -20,7 +24,6 @@ class Table {
 
     /**
      * Get item by id
-     * @template T
      * @param {number} id - item id
      * @returns {Promise<T|null>}
      */
@@ -30,7 +33,6 @@ class Table {
 
     /**
      * Return items matching filter function
-     * @template T
      * @param {(item: T) => boolean} filterFc - filter function
      * @returns {Promise<T[]>}
      */
@@ -40,7 +42,6 @@ class Table {
 
     /**
      * Update item with data
-     * @template T
      * @param {number} id - id of the item to update
      * @param {T} data - data to update
      * @returns {Promise<void>}
@@ -51,7 +52,6 @@ class Table {
 
     /**
      * Set data fo the item
-     * @template T
      * @param {number} id - id fo the item to set
      * @param {T} data - data to set
      * @returns {Promise<void>}
@@ -71,7 +71,6 @@ class Table {
 
     /**
      * Insert data into table and returns id of the new item
-     * @template T
      * @param {T} data - data
      * @returns {Promise<number>}
      */
@@ -91,7 +90,7 @@ class Table {
      * Delete table
      * @returns {Promise<void>}
      */
-    deleteTable () {
+    drop () {
         deleteFile(this.path);
     }
 

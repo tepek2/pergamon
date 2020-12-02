@@ -26,8 +26,8 @@ describe('test table functionality', () => {
             await table.update(id, newData);
             expect(await table.get(id)).toMatchObject({ ...newData, id });
 
-            await table.deleteTable();
-            expect(await exists(newTable)).toBeFalsy();
+            await table.drop();
+            expect(await exists(table.path)).toBeFalsy();
 
             const newTableId = await table.insert(testData);
             expect(newTableId).toBe(id);

@@ -1,15 +1,16 @@
 'use strict';
 
 const Path = require('path');
-const { createPath, getFilsesNames, deleteFile, deleteFolder } = require('./utils/fs-utils');
+const { createPath, deleteFolder } = require('./utils/fs-utils');
 const Table = require('./table');
-const { ERROR_TABLE_NAME } = require('./errors');
+const Json = require('./json');
+const { ERROR_TABLE_NAME, ERROR_JSON_NAME } = require('./errors');
 
 /**
  * Create path for table file
  *
  * @param {string} tableName - table name
- * @param {*} dbPath - path to db folder
+ * @param {string} dbPath - path to db folder
  * @returns {string}
  */
 const tablePath = (tableName, dbPath) => {
@@ -21,26 +22,18 @@ const tablePath = (tableName, dbPath) => {
 };
 
 /**
- * Return object with all tables
+ * Create path for json file
  *
- * @async
- * @param {string} path - path to db folder
- * @returns {Promise<Object.<string, Table>>}
+ * @param {string} name - json name
+ * @param {string} dbPath - path to db folder
+ * @returns {string}
  */
-const getTables = async (path) => {
-    const filesNames = await getFilsesNames(path);
-    return filesNames.reduce(async (tables, fileName) => {
-        if (Table.isTableFileName(fileName)) {
-            const tableName = Table.getTableNameFromFileName(fileName);
-            const table = new Table(Path.join(path, fileName));
-            await table.init();
-            return {
-                ...tables,
-                [tableName]: table
-            };
-        }
-        return tables;
-    }, {});
+const jsonPath = (name, dbPath) => {
+    const jsonFileName = `${name}.db.json`;
+    if (!Json.isJsonFileName(jsonFileName)) {
+        throw new Error(ERROR_JSON_NAME);
+    }
+    return Path.join(dbPath, jsonFileName);
 };
 
 class Pergamon {
@@ -58,7 +51,17 @@ class Pergamon {
      */
     async init () {
         await createPath(this.path);
-        this.tables = getTables(this.path);
+    }
+
+    /**
+     * Create new json
+     * @param {string} name - json name
+     * @returns {Json}
+     */
+    createJson (name) {
+        const json = new Json(jsonPath(name, this.path));
+        json.init().then();
+        return json;
     }
 
     /**
@@ -69,19 +72,7 @@ class Pergamon {
     createTable (name) {
         const table = new Table(tablePath(name, this.path));
         table.init().then();
-        this.tables[name] = table;
         return table;
-    }
-
-    /**
-     * Delete table
-     * @async
-     * @param {string} name - table name
-     * @returns {Promise<void>}
-     */
-    async dropTable (name) {
-        await deleteFile(this.tables[name].getTablePath());
-        delete this.tables[name];
     }
 
     /**
