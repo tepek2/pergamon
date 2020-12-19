@@ -1,22 +1,26 @@
 'use strict';
 
-const { deleteFolder, exists } = require('../src/utils/fs-utils');
+const Path = require('path');
+const { deleteFolder, exists, createTempFolder, createFsStructure } = require('utils-helpers').fs;
+const { pergamonStructure } = require('./structure');
 const Pergamon = require('../src/pergamon');
 
 describe('test pergamon', () => {
     describe('test basic workflow with pergamon', () => {
-        const dbPath1 = './test/data/db1';
-        const dbPath2 = './test/data/db2';
+        let tempFolder = '';
+        beforeAll(async () => {
+            tempFolder = await createTempFolder('pergamon');
+            await createFsStructure(tempFolder, pergamonStructure);
+        });
 
         afterAll(async () => {
-            await deleteFolder(dbPath1);
-            await deleteFolder(dbPath2);
+            await deleteFolder(tempFolder);
         });
 
         it('should crate two databases', async () => {
-            const db1 = Pergamon(dbPath1);
+            const db1 = Pergamon(Path.join(tempFolder, 'db1'));
             await db1.init();
-            const db2 = Pergamon(dbPath2);
+            const db2 = Pergamon(Path.join(tempFolder, 'db2'));
             await db2.init();
 
             const db1Table1Data = { id: 0, data: 'db1_table1' };
@@ -48,7 +52,7 @@ describe('test pergamon', () => {
         });
 
         it('should load database', async () => {
-            const dbPath = './test/data/db';
+            const dbPath = Path.join(tempFolder, 'data', 'db');
             const data = { id: 0, data: 'data' };
 
             const db = Pergamon(dbPath);

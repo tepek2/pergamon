@@ -10,7 +10,9 @@
   },
   "author": "tepek2",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "utils-helpers": "^0.1.1"
+  },
   "devDependencies": {
     "eslint": "^7.9.0",
     "eslint-config-standard": "^14.1.1",
@@ -21,9 +23,6 @@
     "jest": "^26.4.2",
     "typescript": "^4.0.3",
     "@types/jest": "^26.0.16"
-  },
-  "engines": {
-    "node": ">=12.19.0"
   },
   "homepage": "https://github.com/tepek2/pergamon",
   "keywords": [

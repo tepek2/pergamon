@@ -1,4 +1,0 @@
-{"id": 0, "data1": "something"}
-{"id": 1, "data1": "somethingOther"}
-{"id": 2, "data": "test", "data1": "somethingTotallyOther"}
-{"id": 3, "data": "test", "data1": "something3"}

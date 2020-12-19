@@ -1,18 +1,25 @@
 'use strict';
 
-const { exists, deleteFile } = require('../src/utils/fs-utils');
+const Path = require('path');
+const { exists, createTempFolder, deleteFolder, createFsStructure } = require('utils-helpers').fs;
+const { dataFunctionsStructure } = require('./structure');
 const Table = require('../src/table');
 
 describe('test table functionality', () => {
     describe('test createTable', () => {
-        const dataFile = './test/data/data-functions.txt';
-        const newTable = './test/data/new-table.txt';
+        let tempFolder = '';
 
-        afterEach(async () => {
-            await deleteFile(newTable);
+        beforeAll(async () => {
+            tempFolder = await createTempFolder('table');
+            await createFsStructure(tempFolder, dataFunctionsStructure);
+        });
+
+        afterAll(async () => {
+            await deleteFolder(tempFolder);
         });
 
         it('should create table, do operations with data and delete table', async () => {
+            const newTable = Path.join(tempFolder, 'new-table.txt');
             const testData = { data: 'something' };
 
             const table = new Table(newTable);
@@ -35,7 +42,7 @@ describe('test table functionality', () => {
         });
 
         it('should filter items', async () => {
-            const table = new Table(dataFile);
+            const table = new Table(Path.join(tempFolder, 'data', 'data-functions.txt'));
             await table.init();
 
             const items = await table.filter((item) => item.id >= 0);
@@ -46,10 +53,11 @@ describe('test table functionality', () => {
         });
 
         it('should return path to table file', async () => {
-            const table = new Table(dataFile);
+            const dataFilePath = Path.join(tempFolder, 'data', 'data-functions.txt');
+            const table = new Table(dataFilePath);
             await table.init();
 
-            expect(table.getTablePath()).toMatch(dataFile);
+            expect(table.getTablePath()).toMatch(dataFilePath);
         });
     });
 

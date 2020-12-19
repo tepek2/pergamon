@@ -1,6 +1,6 @@
 'use strict';
 
-const { createFile, readFile, rewriteFile } = require('./utils/fs-utils');
+const { createFile, readFile, rewriteFile } = require('utils-helpers').fs;
 
 /**
  * @template T
@@ -14,8 +14,11 @@ class Json {
         this.path = path;
     }
 
-    init () {
-        createFile(this.path);
+    /**
+     * @async
+     */
+    async init () {
+        await createFile(this.path);
     }
 
     /**

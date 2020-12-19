@@ -1,6 +1,6 @@
 'use strict';
 
-const { getLine, readLines, updateLine, getLineCount, appendFile, checkENOENT } = require('./utils/fs-utils');
+const { getLine, readLines, updateLine, getLineCount, appendFile, checkENOENT } = require('utils-helpers').fs;
 const { ERROR_UPDATE, ERROR_NEGATIVE_ID } = require('./errors');
 
 /**
