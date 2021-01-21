@@ -1,9 +1,10 @@
 'use strict';
 
 const Path = require('path');
-const { syncify } = require('utils-helpers').utils;
+const { syncify } = require('utils-helpers/src/utils');
+const { copyFile, getLineCount, createTempFolder, createFsStructure, deleteFolder } = require('utils-helpers/src/fs');
+
 const { getItem, filterItems, updateItem, setItem, deleteItem, insertItem } = require('../src/data-functions');
-const { copyFile, getLineCount, createTempFolder, createFsStructure, deleteFolder } = require('utils-helpers').fs;
 const { ERROR_UPDATE, ERROR_NEGATIVE_ID } = require('../src/errors');
 const { dataFunctionsStructure } = require('./structure');
 

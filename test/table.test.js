@@ -1,7 +1,8 @@
 'use strict';
 
 const Path = require('path');
-const { exists, createTempFolder, deleteFolder, createFsStructure } = require('utils-helpers').fs;
+const { exists, createTempFolder, deleteFolder, createFsStructure } = require('utils-helpers/src/fs');
+
 const { dataFunctionsStructure } = require('./structure');
 const Table = require('../src/table');
 

@@ -1,7 +1,8 @@
 'use strict';
 
 const Path = require('path');
-const { exists, createTempFolder, deleteFolder } = require('utils-helpers').fs;
+const { exists, createTempFolder, deleteFolder } = require('utils-helpers/src/fs');
+
 const Json = require('../src/json');
 
 describe('test json functionality', () => {

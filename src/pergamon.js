@@ -1,7 +1,8 @@
 'use strict';
 
 const Path = require('path');
-const { createPath, deleteFolder } = require('utils-helpers').fs;
+const { createPath, deleteFolder } = require('utils-helpers/src/fs');
+
 const Table = require('./table');
 const Json = require('./json');
 const { ERROR_TABLE_NAME, ERROR_JSON_NAME } = require('./errors');

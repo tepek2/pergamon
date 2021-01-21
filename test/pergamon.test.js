@@ -1,7 +1,8 @@
 'use strict';
 
 const Path = require('path');
-const { deleteFolder, exists, createTempFolder, createFsStructure } = require('utils-helpers').fs;
+const { deleteFolder, exists, createTempFolder, createFsStructure } = require('utils-helpers/src/fs');
+
 const { pergamonStructure } = require('./structure');
 const Pergamon = require('../src/pergamon');
 

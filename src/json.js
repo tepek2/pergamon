@@ -1,6 +1,6 @@
 'use strict';
 
-const { createFile, readFile, rewriteFile } = require('utils-helpers').fs;
+const { createFile, readFile, rewriteFile } = require('utils-helpers/src/fs');
 
 /**
  * @template T

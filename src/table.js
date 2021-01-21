@@ -1,6 +1,6 @@
 'use strict';
 
-const { createFile, deleteFile } = require('utils-helpers').fs;
+const { createFile, deleteFile } = require('utils-helpers/src/fs');
 const { getItem, filterItems, updateItem, deleteItem, insertItem, setItem } = require('./data-functions');
 
 /**
